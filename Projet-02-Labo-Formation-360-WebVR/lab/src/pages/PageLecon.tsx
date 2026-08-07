@@ -114,7 +114,9 @@ export default function PageLecon() {
 </script>`}</pre>
       )}
 
-      <div style={styles.disposition}>
+      {/* `labo-lecon-grille` : point d'accroche des media queries d'index.css,
+          les styles inline ne pouvant pas porter de point de rupture. */}
+      <div style={styles.disposition} className="labo-lecon-grille">
         <article style={styles.cours}>
           <h2 style={styles.h2}>Objectifs de la séquence</h2>
           <p style={styles.paragraphe}>

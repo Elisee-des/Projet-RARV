@@ -36,7 +36,9 @@ var n = class extends HTMLElement {
 			environment: t,
 			embed: "1"
 		});
-		return n && r.set("userRef", n), `${new URL(".", "" + import.meta.url).origin}/atelier?${r}`;
+		n && r.set("userRef", n);
+		let i = new URL(".", "" + import.meta.url);
+		return new URL(`atelier?${r}`, i).href;
 	}
 	rendre() {
 		let e = this.shadowRoot;

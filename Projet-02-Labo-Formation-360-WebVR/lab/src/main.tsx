@@ -57,7 +57,20 @@ if (!racine) throw new Error('Élément #root introuvable dans index.html')
 
 createRoot(racine).render(
   <StrictMode>
-    <BrowserRouter>
+    {/*
+      basename : sous-chemin de déploiement.
+
+      Les routes sont déclarées en absolu (« /atelier », « /lecon »…). Sans
+      basename, elles sont interprétées depuis la RACINE DU DOMAINE : servi
+      sous /labo/, un clic sur « Leçon LMS » emmenait le navigateur vers
+      rarv.kodemeet.com/lecon, hors de l'application. La page s'affichait
+      encore — React restait chargé — mais un rechargement donnait un 404, et
+      toutes les URL relatives partaient du mauvais dossier.
+
+      import.meta.env.BASE_URL vaut « /labo/ » en production et « / » en
+      développement : la même expression couvre les deux.
+    */}
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route element={<Coquille />}>
           <Route path="/" element={<PagePresentation />} />

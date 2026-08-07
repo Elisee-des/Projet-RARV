@@ -45,22 +45,31 @@ const LIENS: Lien[] = [
 
 export default function Navbar() {
   return (
-    <header style={styles.barre}>
-      <div style={styles.marque}>
+    /*
+      Les `className` ci-dessous n'ont pas de style par défaut : ils servent
+      uniquement de points d'accroche aux media queries d'index.css. Les
+      styles de ce fichier étant des objets inline, une règle CSS ne peut les
+      surcharger sans sélecteur explicite.
+    */
+    <header style={styles.barre} className="labo-barre">
+      <div style={styles.marque} className="labo-marque">
         <span style={styles.pastille} aria-hidden="true" />
         <div>
           <p style={styles.titre}>Atelier de maintenance</p>
-          <p style={styles.sousTitre}>Laboratoire de formation 3D · module labo-formation</p>
+          <p style={styles.sousTitre} className="labo-sous-titre">
+            Laboratoire de formation 3D · module labo-formation
+          </p>
         </div>
       </div>
 
-      <nav style={styles.nav} aria-label="Navigation principale">
+      <nav style={styles.nav} className="labo-nav" aria-label="Navigation principale">
         {LIENS.map(({ vers, libelle, Icone, aide }) => (
           <NavLink
             key={vers}
             to={vers}
             end={vers === '/'}
             title={aide}
+            className="labo-lien"
             style={({ isActive }) => ({
               ...styles.lien,
               ...(isActive ? styles.lienActif : null),

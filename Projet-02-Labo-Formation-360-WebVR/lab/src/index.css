@@ -33,3 +33,73 @@ canvas {
   display: block;
   touch-action: none;
 }
+
+/* =====================================================================
+   Adaptation aux petits écrans
+   =====================================================================
+
+   Les styles de ce projet sont des objets inline. Une règle CSS ordinaire
+   ne peut donc pas les surcharger : d'où les `!important` ci-dessous, qui
+   ne s'appliquent qu'aux quelques propriétés réellement dépendantes de la
+   largeur. Les classes visées n'ont aucun style par défaut, elles servent
+   uniquement de points d'accroche.
+   ===================================================================== */
+
+/* --- Barre de navigation ------------------------------------------- */
+
+@media (max-width: 900px) {
+  /* Le sous-titre mange la place des six entrées de menu. */
+  .labo-sous-titre {
+    display: none !important;
+  }
+
+  .labo-barre {
+    gap: 10px !important;
+    padding: 0 10px !important;
+  }
+
+  /*
+     La navigation défile horizontalement plutôt que de passer à la ligne.
+     La barre est en position fixe, d'une hauteur reprise en JavaScript
+     (HAUTEUR_NAVBAR) pour décaler le contenu : la laisser grandir
+     décalerait tout le site sans que le padding ne suive.
+  */
+  .labo-nav {
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .labo-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .labo-lien {
+    flex: none !important;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Icônes seules : six libellés ne tiennent pas, et le `title` de chaque
+     lien reste disponible au survol comme au lecteur d'écran. */
+  .labo-lien span {
+    display: none;
+  }
+
+  .labo-lien {
+    padding: 8px 10px !important;
+  }
+}
+
+/* --- Pages de contenu ----------------------------------------------- */
+
+@media (max-width: 900px) {
+  /* Cours et panneau latéral empilés : à 240 px minimum chacun, deux
+     colonnes ne tiennent pas sous 900 px. */
+  .labo-lecon-grille {
+    grid-template-columns: 1fr !important;
+  }
+}

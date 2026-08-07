@@ -63,7 +63,21 @@ export class RarvLab extends HTMLElement {
     const parametres = new URLSearchParams({ environment: environnement, embed: '1' })
     if (userRef) parametres.set('userRef', userRef)
 
-    return `${new URL('.', import.meta.url).origin}/atelier?${parametres}`
+    /*
+     * URL résolue relativement au DOSSIER de ce module, jamais à l'origine
+     * du domaine.
+     *
+     * `.origin` donnait « https://exemple.fr/atelier » : correct tant que le
+     * labo est servi à la racine, faux dès qu'il vit dans un sous-dossier —
+     * l'iframe pointait alors hors de l'application et affichait un 404, à
+     * l'intérieur d'une page de leçon qui, elle, s'affichait normalement.
+     *
+     * `new URL('.', import.meta.url)` vaut « …/labo/ » en production et « / »
+     * en développement : la forme relative couvre les deux.
+     */
+    const dossier = new URL('.', import.meta.url)
+
+    return new URL(`atelier?${parametres}`, dossier).href
   }
 
   private rendre(): void {
