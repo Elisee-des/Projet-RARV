@@ -50,14 +50,16 @@ etape('Nettoyage du paquet précédent')
 rmSync(paquet, { recursive: true, force: true })
 mkdirSync(app, { recursive: true })
 
-if (!sansBuild) {
-  etape('Construction du viewer (base /viewer/)')
-  execSync('npm run build', {
-    cwd: viewer,
-    stdio: 'inherit',
-    env: { ...process.env, VITE_BASE: '/viewer/' },
-  })
-}
+/*
+ * Les fronts sont construits et publiés dans `api/public/` par un script
+ * dédié — ils y sont VERSIONNÉS, l'hébergement mutualisé ne pouvant rien
+ * compiler. La copie de `public/` ci-dessous les embarque donc d'office.
+ */
+etape('Publication des fronts dans api/public/')
+execSync(`node "${join(racine, 'scripts', 'publier-fronts.mjs')}"${sansBuild ? ' --sans-build' : ''}`, {
+  cwd: racine,
+  stdio: 'inherit',
+})
 
 if (!existsSync(join(viewer, 'dist', 'index.html'))) {
   console.error('\n✗ viewer/dist introuvable. Lancez le script sans --sans-build.')
@@ -153,79 +155,30 @@ etape('Copie du modèle de configuration')
 cpSync(join(api, '.env.production.example'), join(app, '.env.example'))
 
 /* ------------------------------------------------------------------ *
- * Fronts
- * ------------------------------------------------------------------ */
-
-etape('Intégration du viewer dans public/viewer/')
-
-/**
- * `@react-three/xr` embarque un émulateur WebXR et ses décors de test —
- * music_room, living_room, office_large… soit près de 6 Mo.
+ * Contrôle des fronts
+ * ------------------------------------------------------------------ *
  *
- * Le store est configuré avec `emulate: false` (voir viewer/src/viewer/
- * xrStore.ts) : sans cela, un poste de développement se déclarerait compatible
- * RA et toute la détection de capacités mentirait. Ces morceaux ne sont donc
- * JAMAIS chargés en production — ils sont retirés du paquet.
- *
- * Ils restent présents dans le build local, où VITE_XR_EMULATE=1 permet de
- * tester la RA sans appareil.
+ * Ils ont déjà été copiés avec `public/` : `publier-fronts.mjs` les écrit
+ * dans `api/public/`, où ils sont versionnés. On se contente de vérifier
+ * qu'ils sont bien arrivés dans le paquet.
  */
-const MORCEAUX_EMULATEUR = /^(emulate-|.*_room-|office_(small|large)-)/
 
-let ecartes = 0
+etape('Contrôle des fronts embarqués')
 
-cpSync(join(viewer, 'dist'), join(app, 'public', 'viewer'), {
-  recursive: true,
-  filter: (chemin) => {
-    const nom = chemin.split(/[\\/]/).pop() ?? ''
+for (const nom of ['viewer', 'labo']) {
+  const cible = join(app, 'public', nom)
 
-    if (MORCEAUX_EMULATEUR.test(nom)) {
-      ecartes += statSync(chemin).size
-
-      return false
-    }
-
-    return true
-  },
-})
-
-console.log(`  émulateur WebXR écarté : ${(ecartes / 1024 / 1024).toFixed(1)} Mo`)
-
-/**
- * Module « labo-formation » du Projet 02.
- *
- * Construit ICI, avec sa propre base : les deux fronts partagent le domaine et
- * le backend, ils doivent donc être empaquetés ensemble. Un labo compilé pour
- * la racine afficherait une page blanche sous /labo/.
- */
-const laboRacine = join(racine, '..', 'Projet-02-Labo-Formation-360-WebVR', 'lab')
-const laboDist = join(laboRacine, 'dist')
-
-if (existsSync(join(laboRacine, 'package.json'))) {
-  if (!sansBuild) {
-    etape('Construction du labo de formation (base /labo/)')
-    execSync('npm run build', {
-      cwd: laboRacine,
-      stdio: 'inherit',
-      env: { ...process.env, VITE_BASE: '/labo/' },
-    })
-  }
-
-  // Même garde-fou que pour le viewer : sans repli SPA, toute URL interne
-  // remonte au .htaccess de Laravel et reçoit un 404 du framework.
-  if (!existsSync(join(laboDist, '.htaccess'))) {
-    console.error(`
-✗ lab/dist/.htaccess absent.
-
-  Vite copie /public au moment du build : relancez SANS --sans-build.
-`)
+  if (!existsSync(join(cible, 'index.html'))) {
+    console.error(`\n✗ public/${nom}/index.html absent du paquet.`)
     process.exit(1)
   }
 
-  etape('Intégration du labo de formation dans public/labo/')
-  cpSync(laboDist, join(app, 'public', 'labo'), { recursive: true })
-} else {
-  console.log('  (labo-formation introuvable — paquet limité au viewer)')
+  if (!existsSync(join(cible, '.htaccess'))) {
+    console.error(`\n✗ public/${nom}/.htaccess absent — le repli SPA ne fonctionnerait pas.`)
+    process.exit(1)
+  }
+
+  console.log(`  ${nom} : index.html + .htaccess OK`)
 }
 
 /* ------------------------------------------------------------------ *

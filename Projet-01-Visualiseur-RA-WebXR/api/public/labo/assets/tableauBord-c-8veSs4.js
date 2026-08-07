@@ -1,0 +1,1 @@
+import{t as e}from"./client-SIYeeOu7.js";var t=`atelier-maintenance-01`;function n(){return e(`/dashboard/environments/${t}`)}function r(t){return e(`/dashboard/quizzes/${t}`)}function i(t=60){return e(`/dashboard/xapi?limit=${t}`)}function a(){return`/api/dashboard/environments/${t}/export.csv`}export{a as i,n,r,i as t};
