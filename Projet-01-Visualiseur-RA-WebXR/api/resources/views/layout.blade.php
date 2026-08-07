@@ -66,11 +66,30 @@
         .bandeau__nav form { display: inline; margin: 0; }
         .bandeau__lien-bouton { color: var(--doux); }
 
-        @media (max-width: 720px) {
-            .bandeau { padding: 8px 12px; gap: 8px; }
+        /*
+         * Navigation défilante sous 860 px.
+         *
+         * À cinq entrées, le retour à la ligne empile trois rangées et pousse
+         * le contenu hors de l'écran. Une bande qui défile horizontalement
+         * garde la navigation sur une seule ligne, quel que soit le nombre
+         * d'entrées ajoutées ensuite.
+         */
+        @media (max-width: 860px) {
+            .bandeau {
+                flex-direction: column; align-items: stretch;
+                gap: 8px; padding: 10px 12px;
+            }
             .bandeau__marque-suite { display: none; }
-            .bandeau__nav { gap: 2px; font-size: 12.5px; }
-            .bandeau__nav a, .bandeau__lien-bouton { padding: 6px 9px; }
+            .bandeau__nav {
+                flex-wrap: nowrap; overflow-x: auto; gap: 2px;
+                font-size: 12.5px;
+                /* Masque la barre de défilement sans empêcher le geste */
+                scrollbar-width: none; -ms-overflow-style: none;
+                /* Marges négatives : les entrées touchent les bords à fond */
+                margin: 0 -12px; padding: 0 12px 2px;
+            }
+            .bandeau__nav::-webkit-scrollbar { display: none; }
+            .bandeau__nav a, .bandeau__lien-bouton { padding: 7px 10px; }
         }
 
         /* --- Pied de page --- */
@@ -101,6 +120,22 @@
             border-radius: 12px; background: var(--carte);
         }
         .doux { color: var(--doux); font-size: 14px; }
+
+        /*
+         * Tableaux : défilement horizontal DANS leur conteneur.
+         *
+         * Sans cela, un tableau de six colonnes élargit la page entière sur
+         * téléphone : tout le site se met à défiler latéralement, y compris la
+         * navigation et les titres. Le débordement doit rester local.
+         *
+         * `-webkit-overflow-scrolling` conserve l'inertie sur iOS.
+         */
+        .tableau {
+            overflow-x: auto; -webkit-overflow-scrolling: touch;
+            margin: 0 -20px; padding: 0 20px;
+        }
+        .tableau table { min-width: 520px; }
+
         table { width: 100%; border-collapse: collapse; font-size: 14px; }
         th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--bord); }
         th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--doux); }
@@ -132,6 +167,50 @@
             display: flex; align-items: flex-start; gap: 9px; margin-top: 14px;
         }
         .conseil .icone { margin-top: 2px; color: var(--accent); }
+
+        /* Titre de page + action principale, côte à côte puis empilés */
+        .entete-page {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 16px; flex-wrap: wrap;
+        }
+
+        /* --- Adaptation aux petits écrans --- */
+        @media (max-width: 720px) {
+            /* L'action principale passe en pleine largeur : sur un téléphone,
+               un bouton de 140 px collé à droite se rate une fois sur deux. */
+            .entete-page { flex-direction: column; align-items: stretch; gap: 12px; }
+            .entete-page > a { justify-content: center; }
+
+            main { padding: 18px 14px 16px; }
+            h1 { font-size: 21px; }
+            h2 { margin: 26px 0 10px; font-size: 16.5px; }
+            h3 { font-size: 14px; }
+            .carte { padding: 14px 15px; border-radius: 10px; }
+
+            /* Le conteneur défilant reprend la marge réduite de main */
+            .tableau { margin: 0 -15px; padding: 0 15px; }
+
+            th, td { padding: 8px 9px; }
+            .pied { margin-top: 28px; padding: 18px 14px 26px; }
+            .pied nav { gap: 4px 14px; font-size: 12.5px; }
+        }
+
+        /*
+         * Sur un écran étroit, une hauteur fixe de 620 px pour le viewer
+         * dépasse la fenêtre : l'apprenant ne voit ni le titre au-dessus ni
+         * le suivi en dessous. On la ramène à une fraction de la hauteur
+         * réelle — `dvh` et non `vh`, pour tenir compte de la barre d'adresse
+         * mobile qui apparaît et disparaît.
+         */
+        @media (max-width: 720px) {
+            rarv-viewer, rarv-lab { --rarv-hauteur: 62dvh; }
+        }
+
+        @media (max-width: 400px) {
+            main { padding: 14px 11px 14px; }
+            .tableau { margin: 0 -12px; padding: 0 12px; }
+            h1 { font-size: 19px; }
+        }
     </style>
     @stack('tete')
 </head>

@@ -21,6 +21,19 @@
     .bouton--secondaire { background:transparent; border:1px solid var(--bord); color:var(--texte) }
     .bouton--danger { background:transparent; border:1px solid var(--ko); color:var(--ko) }
     .aide { margin:-10px 0 16px; font-size:12px; color:var(--doux) }
+
+    .actions-objet { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px }
+    .actions-objet form { display:inline }
+
+    /* Sur téléphone, les cinq actions passent en pleine largeur : viser un
+       bouton de 120 px au pouce, au milieu d'une rangée, est une source
+       d'erreurs — dont une suppression involontaire. */
+    @media (max-width: 620px) {
+        .actions-objet { flex-direction:column; align-items:stretch }
+        .actions-objet form { display:block }
+        .actions-objet .bouton { width:100%; justify-content:center }
+        .champ input[type="file"] { font-size:13px }
+    }
 </style>
 @endpush
 
@@ -130,6 +143,7 @@
         <div class="carte" style="margin-top:22px">
             <h2 style="margin-top:0">État</h2>
 
+            <div class="tableau">
             <table>
                 <tbody>
                     <tr>
@@ -160,8 +174,9 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
 
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+            <div class="actions-objet">
                 <a href="{{ route('admin.objets.annotations', $objet) }}" class="bouton" style="text-decoration:none">
                     <x-icone nom="annotation" :taille="16"/> Éditer les annotations
                 </a>

@@ -3,7 +3,7 @@
 @section('titre', 'Objets pédagogiques')
 
 @section('contenu')
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <div class="entete-page">
         <div>
             <h1>Objets pédagogiques</h1>
             <p class="doux">{{ $objets->count() }} objet(s) · budget mobile : {{ number_format(\App\Models\LearningObject::BUDGET_TRIANGLES, 0, ',', ' ') }} triangles / {{ \App\Models\LearningObject::BUDGET_TAILLE_KO }} Ko</p>
@@ -17,6 +17,7 @@
     @include('admin._messages')
 
     <div class="carte" style="margin-top:22px">
+        <div class="tableau">
         <table>
             <thead>
                 <tr>
@@ -64,6 +65,7 @@
                 @endforelse
             </tbody>
         </table>
+        </div>
     </div>
 
     <p class="doux" style="margin-top:18px">

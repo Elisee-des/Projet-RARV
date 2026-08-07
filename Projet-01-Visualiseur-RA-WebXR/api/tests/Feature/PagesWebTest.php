@@ -31,13 +31,59 @@ class PagesWebTest extends TestCase
         return $objet;
     }
 
-    /** Étape 10.7 — la racine est désormais la vitrine publique. */
-    public function test_la_racine_affiche_la_page_de_demonstration(): void
+    /**
+     * Étape 10.7 — la racine est la vitrine publique.
+     *
+     * Elle doit présenter les DEUX modules de façon distincte, avec leur
+     * point d'entrée respectif : ce sont les deux adresses portées par le CV.
+     */
+    public function test_la_racine_presente_les_deux_modules(): void
+    {
+        $this->objetPublie();
+
+        $reponse = $this->get('/')->assertOk();
+
+        // Module « viewer-ra »
+        $reponse->assertSee('Projet 01')
+            ->assertSee('réalité augmentée')
+            ->assertSee('Ouvrir la leçon')
+            ->assertSee(url('/lecon/pompe-centrifuge-01'));
+
+        // Module « labo-formation ».
+        // `false` : le libellé est du HTML littéral, pas une valeur échappée
+        // par Blade — assertSee chercherait sinon « l&#039;atelier ».
+        $reponse->assertSee('Projet 02')
+            ->assertSee('Laboratoire de formation')
+            ->assertSee("Entrer dans l'atelier", false)
+            ->assertSee(rtrim((string) config('rarv.lab_url'), '/'));
+    }
+
+    /** Les tableaux doivent défiler DANS leur carte, pas élargir la page. */
+    public function test_les_tableaux_sont_dans_un_conteneur_defilant(): void
+    {
+        $this->objetPublie();
+
+        foreach (['/', '/dashboard', '/admin/objets'] as $url) {
+            $contenu = (string) $this->get($url)->assertOk()->getContent();
+
+            $tables = substr_count($contenu, '<table');
+            $conteneurs = substr_count($contenu, 'class="tableau"');
+
+            $this->assertSame(
+                $tables,
+                $conteneurs,
+                "{$url} : {$tables} tableau(x) pour {$conteneurs} conteneur(s) défilant(s)."
+            );
+        }
+    }
+
+    /** Sans viewport, un mobile rend la page en 980 px puis la dézoome. */
+    public function test_les_pages_declarent_le_viewport_mobile(): void
     {
         $this->get('/')
             ->assertOk()
-            ->assertSee('Essayez en 30 secondes')
-            ->assertSee('Scannez');
+            ->assertSee('name="viewport"', false)
+            ->assertSee('width=device-width', false);
     }
 
     /** Étape 10.2 — en-têtes de sécurité sur les pages HTML. */

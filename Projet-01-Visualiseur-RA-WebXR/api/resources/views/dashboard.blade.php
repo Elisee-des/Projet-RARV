@@ -17,28 +17,31 @@
         <h2>{{ $objet['titre'] }}</h2>
 
         <div class="carte">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Consultations</th>
-                        <th class="num">Total</th>
-                        <th class="num">Passées en RA</th>
-                        <th class="num">Durée moyenne</th>
-                        <th class="num">Terminées</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="doux">{{ $objet['slug'] }}</td>
-                        <td class="num"><strong>{{ $objet['sessions'] }}</strong></td>
-                        <td class="num">{{ $objet['enRa'] }} <span class="doux">({{ $objet['tauxRa'] }} %)</span></td>
-                        <td class="num">{{ $objet['dureeMoyenne'] }} s</td>
-                        <td class="num">{{ $objet['completions'] }} <span class="doux">({{ $objet['tauxCompletion'] }} %)</span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="tableau">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Consultations</th>
+                            <th class="num">Total</th>
+                            <th class="num">Passées en RA</th>
+                            <th class="num">Durée moyenne</th>
+                            <th class="num">Terminées</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="doux">{{ $objet['slug'] }}</td>
+                            <td class="num"><strong>{{ $objet['sessions'] }}</strong></td>
+                            <td class="num">{{ $objet['enRa'] }} <span class="doux">({{ $objet['tauxRa'] }} %)</span></td>
+                            <td class="num">{{ $objet['dureeMoyenne'] }} s</td>
+                            <td class="num">{{ $objet['completions'] }} <span class="doux">({{ $objet['tauxCompletion'] }} %)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h3>Annotations, de la moins consultée à la plus consultée</h3>
+            <div class="tableau">
             <table>
                 <thead>
                     <tr>
@@ -67,6 +70,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
 
             @php
                 $faible = collect($objet['annotations'])->first();
@@ -88,6 +92,7 @@
 
     <h2>Dernières déclarations xAPI</h2>
     <div class="carte">
+        <div class="tableau">
         <table>
             <thead>
                 <tr>
@@ -120,6 +125,7 @@
                 @endforelse
             </tbody>
         </table>
+        </div>
     </div>
 
     <p class="doux" style="margin-top:20px">
