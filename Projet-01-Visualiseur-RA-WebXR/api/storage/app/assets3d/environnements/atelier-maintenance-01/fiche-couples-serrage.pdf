@@ -1,0 +1,114 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 3919 >>
+stream
+BT /F2 17 Tf 1 0 0 1 56 785.89 Tm (Couples de serrage et methode de serrage des brides) Tj ET
+0.42 0.45 0.5 rg
+BT /F1 9.5 Tf 1 0 0 1 56 761.79 Tm (Fiche technique - poste 5, etabli et outillage - atelier de maintenance) Tj ET
+0 0 0 rg
+0.75 0.78 0.82 RG 0.8 w 56 740.01 m 539.28 740.01 l S
+BT /F2 12 Tf 1 0 0 1 56 722.01 Tm (Tableau des couples \(vis acier, filetage sec\)) Tj ET
+BT
+/F2 9.5 Tf 1 0 0 1 56.00 703.81 Tm (Diametre) Tj
+/F2 9.5 Tf 1 0 0 1 176.82 703.81 Tm (Classe 8.8) Tj
+/F2 9.5 Tf 1 0 0 1 297.64 703.81 Tm (Classe 10.9) Tj
+/F2 9.5 Tf 1 0 0 1 418.46 703.81 Tm (Classe 12.9) Tj
+ET
+0.75 0.78 0.82 RG 0.8 w 56 691.81 m 539.28 691.81 l S
+BT
+/F1 9.5 Tf 1 0 0 1 56.00 679.81 Tm (M6) Tj
+/F1 9.5 Tf 1 0 0 1 176.82 679.81 Tm (10 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 297.64 679.81 Tm (14 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 418.46 679.81 Tm (17 N.m) Tj
+ET
+BT
+/F1 9.5 Tf 1 0 0 1 56.00 665.81 Tm (M8) Tj
+/F1 9.5 Tf 1 0 0 1 176.82 665.81 Tm (25 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 297.64 665.81 Tm (35 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 418.46 665.81 Tm (41 N.m) Tj
+ET
+BT
+/F1 9.5 Tf 1 0 0 1 56.00 651.81 Tm (M10) Tj
+/F1 9.5 Tf 1 0 0 1 176.82 651.81 Tm (49 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 297.64 651.81 Tm (69 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 418.46 651.81 Tm (83 N.m) Tj
+ET
+BT
+/F1 9.5 Tf 1 0 0 1 56.00 637.81 Tm (M12) Tj
+/F1 9.5 Tf 1 0 0 1 176.82 637.81 Tm (85 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 297.64 637.81 Tm (120 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 418.46 637.81 Tm (145 N.m) Tj
+ET
+BT
+/F1 9.5 Tf 1 0 0 1 56.00 623.81 Tm (M16) Tj
+/F1 9.5 Tf 1 0 0 1 176.82 623.81 Tm (210 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 297.64 623.81 Tm (295 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 418.46 623.81 Tm (355 N.m) Tj
+ET
+BT
+/F1 9.5 Tf 1 0 0 1 56.00 609.81 Tm (M20) Tj
+/F1 9.5 Tf 1 0 0 1 176.82 609.81 Tm (410 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 297.64 609.81 Tm (580 N.m) Tj
+/F1 9.5 Tf 1 0 0 1 418.46 609.81 Tm (690 N.m) Tj
+ET
+0.66 0.24 0.09 rg
+BT /F1 9.5 Tf 1 0 0 1 56 587.81 Tm (! Valeurs a filetage sec. Un filetage lubrifie reduit le couple d environ 20 % a precontrainte egale) Tj ET
+0 0 0 rg
+0.66 0.24 0.09 rg
+BT /F1 9.5 Tf 1 0 0 1 56 574.04 Tm (: appliquer un couple "sec" sur un filetage huile, c est risquer la rupture de la vis.) Tj ET
+0 0 0 rg
+BT /F2 12 Tf 1 0 0 1 56 548.26 Tm (Methode de serrage d une bride - la regle des 3 passes) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 530.06 Tm (? Serrer EN CROIX, jamais dans l ordre circulaire) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 515.56 Tm (? Passe 1 : 30 % du couple final, sur tous les boulons) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 501.06 Tm (? Passe 2 : 60 % du couple final, sur tous les boulons) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 486.56 Tm (? Passe 3 : 100 % du couple final, sur tous les boulons) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 472.06 Tm (? Passe de controle : refaire un tour complet au couple final ; aucun boulon ne doit tourner) Tj ET
+0.66 0.24 0.09 rg
+BT /F1 9.5 Tf 1 0 0 1 56 450.56 Tm (! L erreur qui fait fuir un joint : serrer un boulon au couple final des la premiere passe. La bride) Tj ET
+0 0 0 rg
+0.66 0.24 0.09 rg
+BT /F1 9.5 Tf 1 0 0 1 56 436.79 Tm (se deforme, le joint est ecrase localement et laisse passer le fluide de l autre cote. Le remontage) Tj ET
+0 0 0 rg
+0.66 0.24 0.09 rg
+BT /F1 9.5 Tf 1 0 0 1 56 423.01 Tm (est refait, et la cause n est jamais identifiee.) Tj ET
+0 0 0 rg
+BT /F2 12 Tf 1 0 0 1 56 397.24 Tm (Etalonnage de la cle dynamometrique) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 379.04 Tm (? Verification annuelle obligatoire, ou apres toute chute) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 364.54 Tm (? Toujours ramener la cle a sa valeur minimale apres usage : un ressort laisse comprime se) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 350.04 Tm (detend et fausse l appareil) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 335.54 Tm (? Ne jamais utiliser une cle dynamometrique pour desserrer) Tj ET
+0.75 0.78 0.82 RG 0.8 w 56 312.04 m 539.28 312.04 l S
+0.55 0.58 0.62 rg
+BT /F1 8 Tf 1 0 0 1 56 300.04 Tm (RARV - plateforme de formation immersive. Document genere depuis docs/contenu.md \(etape 0.2\).) Tj ET
+0 0 0 rg
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000257 00000 n 
+0000004228 00000 n 
+0000004325 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+4427
+%%EOF

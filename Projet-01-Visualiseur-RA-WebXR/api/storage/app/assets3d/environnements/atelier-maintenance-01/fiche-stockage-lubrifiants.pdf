@@ -1,0 +1,72 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 2688 >>
+stream
+BT /F2 17 Tf 1 0 0 1 56 785.89 Tm (Stockage et manipulation des huiles en atelier) Tj ET
+0.42 0.45 0.5 rg
+BT /F1 9.5 Tf 1 0 0 1 56 761.79 Tm (Fiche de securite simplifiee - poste 7 - atelier de maintenance) Tj ET
+0 0 0 rg
+0.75 0.78 0.82 RG 0.8 w 56 740.01 m 539.28 740.01 l S
+BT /F2 12 Tf 1 0 0 1 56 722.01 Tm (Retention) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 703.81 Tm (? Le bac de retention doit contenir le PLUS GRAND des deux volumes : 100 % du plus grand) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 689.31 Tm (contenant stocke, ou 50 % du volume total stocke) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 674.81 Tm (? Le bac est maintenu vide : plein d eau de pluie, il n a plus aucune capacite de retention) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 660.31 Tm (? Un absorbant \(granules ou feuilles\) doit etre disponible a proximite immediate) Tj ET
+BT /F2 12 Tf 1 0 0 1 56 634.81 Tm (Compatibilite) Tj ET
+0.66 0.24 0.09 rg
+BT /F1 9.5 Tf 1 0 0 1 56 614.61 Tm (! Ne jamais melanger deux huiles, meme de viscosite identique et meme usage. Les additifs -) Tj ET
+0 0 0 rg
+0.66 0.24 0.09 rg
+BT /F1 9.5 Tf 1 0 0 1 56 600.84 Tm (anti-usure, antioxydants, detergents - peuvent etre chimiquement incompatibles et former des boues) Tj ET
+0 0 0 rg
+0.66 0.24 0.09 rg
+BT /F1 9.5 Tf 1 0 0 1 56 587.06 Tm (qui bouchent les filtres et les canaux de graissage. En cas de changement de reference, le circuit se) Tj ET
+0 0 0 rg
+0.66 0.24 0.09 rg
+BT /F1 9.5 Tf 1 0 0 1 56 573.29 Tm (vidange et se rince.) Tj ET
+0 0 0 rg
+BT /F2 12 Tf 1 0 0 1 56 547.51 Tm (Etiquetage et contenants) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 529.31 Tm (? Tout bidon entame est referme et etiquete : reference de l huile, date d ouverture) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 514.81 Tm (? Jamais de transvasement dans un contenant alimentaire ou non etiquete) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 500.31 Tm (? Les huiles usagees sont un dechet dangereux : bidon dedie, jamais melange aux solvants,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 485.81 Tm (elimine par une filiere agreee avec bordereau de suivi) Tj ET
+BT /F2 12 Tf 1 0 0 1 56 460.31 Tm (Conduite a tenir en cas de deversement) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 442.11 Tm (? Securiser la zone, supprimer les sources d ignition) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 427.61 Tm (? Endiguer avec l absorbant, du bord vers le centre) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 413.11 Tm (? Collecter dans le bac a dechets dangereux) Tj ET
+BT /F1 10 Tf 1 0 0 1 56 398.61 Tm (? Signaler : un deversement recurrent est le symptome d une fuite a traiter) Tj ET
+0.75 0.78 0.82 RG 0.8 w 56 375.11 m 539.28 375.11 l S
+0.55 0.58 0.62 rg
+BT /F1 8 Tf 1 0 0 1 56 363.11 Tm (RARV - plateforme de formation immersive. Document genere depuis docs/contenu.md \(etape 0.2\).) Tj ET
+0 0 0 rg
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000257 00000 n 
+0000002997 00000 n 
+0000003094 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3196
+%%EOF

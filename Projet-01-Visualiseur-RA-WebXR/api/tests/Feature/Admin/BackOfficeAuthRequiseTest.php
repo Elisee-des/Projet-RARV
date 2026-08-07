@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Models\LearningObject;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -91,16 +92,27 @@ class BackOfficeAuthRequiseTest extends TestCase
         $this->assertGuest();
     }
 
-    /** Avec l'authentification active, le contenu de démonstration redevient supprimable. */
+    /**
+     * Avec l'authentification active, le contenu de démonstration redevient
+     * supprimable.
+     *
+     * ⚠️ Slug de test, jamais celui de la démonstration : `destroy()` efface
+     * `storage/app/assets3d/objets/{slug}` sur le disque RÉEL. Une version
+     * antérieure de ce test utilisait le vrai slug et a supprimé les modèles
+     * 3D du projet — panne découverte seulement en production, par un 404 sur
+     * le .glb.
+     */
     public function test_la_protection_du_contenu_de_demonstration_est_levee(): void
     {
+        config()->set('rarv.contenus_proteges', ['contenu-protege-test']);
+
         $formateur = User::factory()->create();
-        $protege = \App\Models\LearningObject::factory()->create(['slug' => 'pompe-centrifuge-01']);
+        $protege = LearningObject::factory()->create(['slug' => 'contenu-protege-test']);
 
         $this->actingAs($formateur)
             ->delete("/admin/objets/{$protege->slug}")
             ->assertRedirect();
 
-        $this->assertDatabaseMissing('learning_objects', ['slug' => 'pompe-centrifuge-01']);
+        $this->assertDatabaseMissing('learning_objects', ['slug' => 'contenu-protege-test']);
     }
 }

@@ -1,4 +1,14 @@
 *
-!private/
-!public/
 !.gitignore
+
+# Assets 3D des objets pédagogiques — VERSIONNÉS.
+#
+# Le `*` ci-dessus vient de Laravel : storage/app contient d'ordinaire des
+# fichiers déposés par les utilisateurs, qui n'ont rien à faire dans un dépôt.
+#
+# Ceux-ci sont différents : ce sont les MODÈLES 3D du contenu de démonstration,
+# produits par les scripts du projet. L'hébergement mutualisé ne pouvant rien
+# générer, ils doivent arriver par « git pull » — sans eux, le viewer affiche
+# « Le modèle 3D n'a pas pu être chargé » et un 404 sur le .glb.
+!assets3d/
+!assets3d/**

@@ -119,20 +119,30 @@ class BackOfficeTest extends TestCase
      * que pointe le CV. Suppression et dépublication lui sont donc refusées —
      * tout le reste demeure modifiable.
      */
+    /**
+     * ⚠️ Slug de test, jamais celui de la démonstration : `destroy()` efface
+     * `storage/app/assets3d/objets/{slug}` sur le disque RÉEL. Utiliser le
+     * vrai slug reviendrait à jouer avec les modèles 3D du projet à chaque
+     * exécution de la suite.
+     */
     public function test_le_contenu_de_demonstration_ne_peut_pas_etre_supprime(): void
     {
-        $protege = LearningObject::factory()->create(['slug' => 'pompe-centrifuge-01']);
+        config()->set('rarv.contenus_proteges', ['contenu-protege-test']);
+
+        $protege = LearningObject::factory()->create(['slug' => 'contenu-protege-test']);
 
         $this->delete("/admin/objets/{$protege->slug}")
             ->assertSessionHasErrors('suppression');
 
-        $this->assertDatabaseHas('learning_objects', ['slug' => 'pompe-centrifuge-01']);
+        $this->assertDatabaseHas('learning_objects', ['slug' => 'contenu-protege-test']);
     }
 
     public function test_le_contenu_de_demonstration_ne_peut_pas_etre_depublie(): void
     {
+        config()->set('rarv.contenus_proteges', ['contenu-protege-test']);
+
         $protege = LearningObject::factory()->create([
-            'slug' => 'pompe-centrifuge-01',
+            'slug' => 'contenu-protege-test',
             'status' => 'published',
         ]);
 
@@ -154,10 +164,12 @@ class BackOfficeTest extends TestCase
     /** Le contenu protégé reste entièrement modifiable — seul l'irréversible est bloqué. */
     public function test_le_contenu_de_demonstration_reste_modifiable(): void
     {
-        $protege = LearningObject::factory()->create(['slug' => 'pompe-centrifuge-01']);
+        config()->set('rarv.contenus_proteges', ['contenu-protege-test']);
+
+        $protege = LearningObject::factory()->create(['slug' => 'contenu-protege-test']);
 
         $this->put("/admin/objets/{$protege->slug}", $this->champs([
-            'slug' => 'pompe-centrifuge-01',
+            'slug' => 'contenu-protege-test',
             'title' => 'Titre corrigé',
         ]))->assertRedirect();
 
