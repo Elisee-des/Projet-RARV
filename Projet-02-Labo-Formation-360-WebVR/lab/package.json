@@ -1,0 +1,50 @@
+{
+  "name": "lab",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "blocking:generer": "node ../scripts/generer-salle-blocking.mjs ../../Projet-01-Visualiseur-RA-WebXR/api/storage/app/assets3d/environnements/atelier-maintenance-01",
+    "assets:generer": "node ../scripts/generer-assets-pedagogiques.mjs ../../Projet-01-Visualiseur-RA-WebXR/api/storage/app/assets3d/environnements/atelier-maintenance-01",
+    "decodeurs:copier": "node scripts/copier-decodeurs.mjs",
+    "recette:collisions": "node scripts/recette-collisions.mjs",
+    "recette:assets": "node scripts/recette-assets.mjs",
+    "recette:chaine": "node scripts/recette-chaine.mjs",
+    "recette": "npm run recette:collisions && npm run recette:assets && npm run recette:chaine",
+    "predev": "npm run decodeurs:copier",
+    "dev": "vite",
+    "prebuild": "npm run decodeurs:copier",
+    "build:wc": "vite build --config vite.config.webcomponent.ts",
+    "build": "tsc -b && npm run build:wc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:watch": "vitest",
+    "typecheck": "tsc -b --pretty false"
+  },
+  "dependencies": {
+    "@react-three/drei": "10.7.8",
+    "@react-three/fiber": "9.7.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-icons": "^5.7.0",
+    "react-router-dom": "^7.18.2",
+    "three": "0.185.1",
+    "three-mesh-bvh": "0.9.14",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.185.4",
+    "@vitejs/plugin-basic-ssl": "2.3.0",
+    "@vitejs/plugin-react": "^6.0.4",
+    "@vitest/coverage-v8": "^4.1.10",
+    "jsdom": "^29.1.1",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0",
+    "vitest": "^4.1.10"
+  }
+}

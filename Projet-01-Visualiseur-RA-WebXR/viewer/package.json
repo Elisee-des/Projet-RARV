@@ -1,0 +1,44 @@
+{
+  "name": "viewer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "decodeurs:copier": "node scripts/copier-decodeurs.mjs",
+    "predev": "npm run decodeurs:copier",
+    "dev": "vite",
+    "prebuild": "npm run decodeurs:copier",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "e2e:navigateurs": "playwright install chromium"
+  },
+  "dependencies": {
+    "@react-three/drei": "10.7.8",
+    "@react-three/fiber": "9.7.0",
+    "@react-three/xr": "6.6.30",
+    "qrcode": "1.5.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-icons": "5.4.0",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.49.1",
+    "@types/node": "^24.13.3",
+    "@types/qrcode": "1.5.6",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.185.4",
+    "@vitejs/plugin-basic-ssl": "2.3.0",
+    "@vitejs/plugin-react": "^6.0.4",
+    "jsdom": "25.0.1",
+    "oxlint": "^1.75.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0",
+    "vitest": "3.2.4"
+  }
+}

@@ -1,0 +1,37 @@
+/* Socle de styles — viewer RA (Projet 01) */
+
+:root {
+  --bg: #12161a;
+  --panel: rgba(20, 26, 32, 0.82);
+  --border: rgba(255, 255, 255, 0.1);
+  --text: #d7dee5;
+  --text-h: #ffffff;
+  --muted: #8b98a5;
+  --ok: #4ade80;
+  --ko: #f87171;
+  --info: #60a5fa;
+
+  font: 16px/1.5 system-ui, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Empêche le défilement de la page pendant la manipulation 3D au doigt */
+canvas {
+  touch-action: none;
+  display: block;
+}

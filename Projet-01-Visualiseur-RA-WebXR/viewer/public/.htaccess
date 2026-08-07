@@ -1,0 +1,62 @@
+# Viewer RA — servi sous https://rarv.kodemeet.com/viewer/
+#
+# Ce fichier est copié tel quel dans dist/ par Vite (tout /public l'est).
+#
+# Rôle : replier les routes de l'application sur index.html. Sans lui,
+# /viewer/ar/{token} et /viewer/editeur/{slug} n'existent pas sur le disque,
+# Apache remonte au .htaccess de Laravel, et l'apprenant reçoit un 404 du
+# framework au lieu du viewer. La bascule QR et l'éditeur seraient morts.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /viewer/
+
+    # Les fichiers et dossiers réels sont servis directement : assets, wasm,
+    # décodeurs. Ne jamais les rediriger.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Tout le reste appartient au routage interne du viewer.
+    RewriteRule . /viewer/index.html [L]
+</IfModule>
+
+# --- Types MIME ---------------------------------------------------------
+# Les hébergements mutualisés ignorent souvent .wasm et .glb, servis alors en
+# application/octet-stream : le décodeur WebAssembly refuse de démarrer et le
+# modèle 3D reste invisible, sans erreur explicite.
+<IfModule mod_mime.c>
+    AddType application/wasm            .wasm
+    AddType model/gltf-binary           .glb
+    AddType model/gltf+json             .gltf
+    AddType model/vnd.usdz+zip          .usdz
+    AddType image/ktx2                  .ktx2
+    AddType application/javascript      .mjs
+</IfModule>
+
+# --- Cache --------------------------------------------------------------
+# Les fichiers d'assets portent un hash dans leur nom : ils sont immuables.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js|css|wasm|woff2)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # index.html ne doit JAMAIS être mis en cache : c'est lui qui référence
+    # les noms hashés. Mis en cache, il continuerait à demander des fichiers
+    # supprimés au déploiement suivant.
+    <FilesMatch "^index\.html$">
+        Header set Cache-Control "no-cache, must-revalidate"
+    </FilesMatch>
+
+    # Les décodeurs changent avec la version de Three.js, jamais autrement.
+    <FilesMatch "^(draco_|basis_)">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+</IfModule>
+
+# --- Compression --------------------------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+    # .wasm et .glb sont déjà compressés — les repasser en gzip coûte du CPU
+    # pour rien.
+</IfModule>

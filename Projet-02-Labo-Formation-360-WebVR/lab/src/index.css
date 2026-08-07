@@ -1,0 +1,35 @@
+:root {
+  --fond: #0b1220;
+  --fond-panneau: rgb(15 23 42 / 0.82);
+  --bordure: rgb(148 163 184 / 0.25);
+  --texte: #e2e8f0;
+  --texte-doux: #94a3b8;
+  --accent: #38bdf8;
+  --ok: #4ade80;
+  --erreur: #f87171;
+
+  color-scheme: dark;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--texte);
+  background-color: var(--fond);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* La 3D occupe tout l'écran ; l'UI se superpose en HTML (décision du Lot 6 :
+   les modales de quiz sont en HTML par-dessus le canvas, jamais en texte 3D). */
+canvas {
+  display: block;
+  touch-action: none;
+}

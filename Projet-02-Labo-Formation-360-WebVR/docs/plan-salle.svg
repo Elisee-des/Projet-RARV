@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 730" width="900" height="730" font-family="'Segoe UI', system-ui, sans-serif">
+  <title>Plan de l'atelier de maintenance — 10 × 8 m, 8 postes</title>
+  <desc>Plan au sol de l'environnement du Projet 02. Échelle 60 px = 1 m. Origine au coin haut gauche : X vers la droite (0 à 10 m), Z vers le bas (0 à 8 m).</desc>
+
+  <!-- Fond explicite : le plan reste lisible en thème clair comme en thème sombre -->
+  <rect x="0" y="0" width="900" height="730" fill="#ffffff"/>
+
+  <!-- ================= Titre ================= -->
+  <text x="100" y="34" font-size="19" font-weight="700" fill="#0f172a">Atelier de maintenance industrielle — plan au sol</text>
+  <text x="100" y="56" font-size="13" fill="#475569">10 × 8 m · hauteur sous plafond 3,2 m · hauteur d'œil 1,65 m · 8 postes · échelle 60 px = 1 m</text>
+
+  <!-- ================= Grille au mètre ================= -->
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="160" y1="80" x2="160" y2="560"/><line x1="220" y1="80" x2="220" y2="560"/>
+    <line x1="280" y1="80" x2="280" y2="560"/><line x1="340" y1="80" x2="340" y2="560"/>
+    <line x1="400" y1="80" x2="400" y2="560"/><line x1="460" y1="80" x2="460" y2="560"/>
+    <line x1="520" y1="80" x2="520" y2="560"/><line x1="580" y1="80" x2="580" y2="560"/>
+    <line x1="640" y1="80" x2="640" y2="560"/>
+    <line x1="100" y1="140" x2="700" y2="140"/><line x1="100" y1="200" x2="700" y2="200"/>
+    <line x1="100" y1="260" x2="700" y2="260"/><line x1="100" y1="320" x2="700" y2="320"/>
+    <line x1="100" y1="380" x2="700" y2="380"/><line x1="100" y1="440" x2="700" y2="440"/>
+    <line x1="100" y1="500" x2="700" y2="500"/>
+  </g>
+
+  <!-- ================= Murs ================= -->
+  <rect x="100" y="80" width="600" height="480" fill="none" stroke="#0f172a" stroke-width="7"/>
+
+  <!-- Porte d'entrée : mur du bas, X 8,0 → 9,5 m -->
+  <line x1="580" y1="560" x2="670" y2="560" stroke="#ffffff" stroke-width="9"/>
+  <path d="M 580 560 A 90 90 0 0 1 580 470" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="580" y1="560" x2="580" y2="472" stroke="#64748b" stroke-width="3"/>
+  <text x="625" y="582" font-size="12" fill="#475569" text-anchor="middle" font-weight="600">PORTE</text>
+
+  <!-- ================= Mobilier (emprise au sol) ================= -->
+  <g fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5">
+    <rect x="340" y="551" width="120" height="9"/>   <!-- P01 panneau mural  X 4,0-6,0 -->
+    <rect x="100" y="374" width="24"  height="72"/>  <!-- P02 armoire élec   X 0-0,4 · Z 4,9-6,1 -->
+    <rect x="100" y="470" width="30"  height="60"/>  <!-- P03 armoire EPI    X 0-0,5 · Z 6,5-7,5 -->
+    <rect x="214" y="164" width="72"  height="72"/>  <!-- P04 socle pompe    1,2 × 1,2 -->
+    <rect x="310" y="80"  width="180" height="48"/>  <!-- P05 établi         3,0 × 0,8 -->
+    <rect x="496" y="164" width="108" height="72"/>  <!-- P06 banc vibrat.   1,8 × 1,2 -->
+    <rect x="664" y="332" width="36"  height="96"/>  <!-- P07 étagère huiles 0,6 × 1,6 -->
+    <rect x="508" y="446" width="84"  height="48"/>  <!-- P08 pupitre        1,4 × 0,8 -->
+  </g>
+
+  <!-- ================= Parcours conseillé ================= -->
+  <polyline points="400,470 400,512 172,500 172,410 250,260 400,170 550,260 628,380 550,428"
+            fill="none" stroke="#0ea5e9" stroke-width="2.5" stroke-dasharray="9 6"
+            stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+
+  <!-- ================= Point d'apparition ================= -->
+  <g>
+    <circle cx="400" cy="470" r="13" fill="#ffffff" stroke="#0ea5e9" stroke-width="2.5"/>
+    <path d="M 400 456 L 394 468 L 400 465 L 406 468 Z" fill="#0ea5e9"/>
+    <text x="400" y="496" font-size="11" font-weight="700" fill="#0369a1" text-anchor="middle">SPAWN</text>
+    <text x="400" y="509" font-size="10" fill="#64748b" text-anchor="middle">(5,0 · 6,5) → −Z</text>
+  </g>
+
+  <!-- ================= Zones de proximité (postes à déclenchement automatique) ================= -->
+  <g fill="#0ea5e9" fill-opacity="0.07" stroke="#0ea5e9" stroke-width="1" stroke-dasharray="3 3" opacity="0.8">
+    <circle cx="400" cy="536" r="120"/> <!-- P01 · r = 2,0 m -->
+    <circle cx="130" cy="500" r="90"/>  <!-- P03 · r = 1,5 m -->
+    <circle cx="670" cy="380" r="108"/> <!-- P07 · r = 1,8 m -->
+  </g>
+
+  <!-- ================= Postes ================= -->
+  <!-- panneau #2563eb · vidéo #7c3aed · document #b45309 · quiz #15803d -->
+  <g font-size="13" font-weight="700" text-anchor="middle">
+    <g>
+      <circle cx="400" cy="536" r="15" fill="#2563eb"/>
+      <text x="400" y="541" fill="#ffffff">1</text>
+      <text x="400" y="566" font-size="11" font-weight="600" fill="#1e293b">Accueil</text>
+    </g>
+    <g>
+      <circle cx="130" cy="410" r="15" fill="#7c3aed"/>
+      <text x="130" y="415" fill="#ffffff">2</text>
+      <text x="130" y="440" font-size="11" font-weight="600" fill="#1e293b">Consignation</text>
+    </g>
+    <g>
+      <circle cx="130" cy="500" r="15" fill="#2563eb" fill-opacity="0.55" stroke="#2563eb" stroke-width="2"/>
+      <text x="130" y="505" fill="#ffffff">3</text>
+      <text x="132" y="530" font-size="11" font-weight="600" fill="#1e293b">EPI</text>
+    </g>
+    <g>
+      <circle cx="250" cy="200" r="15" fill="#2563eb"/>
+      <text x="250" y="205" fill="#ffffff">4</text>
+      <text x="250" y="256" font-size="11" font-weight="600" fill="#1e293b">Pompe centrifuge</text>
+      <text x="250" y="269" font-size="10" font-weight="600" fill="#0369a1">🔗 Projet 01</text>
+    </g>
+    <g>
+      <circle cx="400" cy="104" r="15" fill="#b45309"/>
+      <text x="400" y="109" fill="#ffffff">5</text>
+      <text x="400" y="147" font-size="11" font-weight="600" fill="#1e293b">Établi · outillage</text>
+    </g>
+    <g>
+      <circle cx="550" cy="200" r="15" fill="#7c3aed"/>
+      <text x="550" y="205" fill="#ffffff">6</text>
+      <text x="550" y="256" font-size="11" font-weight="600" fill="#1e293b">Banc vibratoire</text>
+    </g>
+    <g>
+      <circle cx="670" cy="380" r="15" fill="#b45309" fill-opacity="0.55" stroke="#b45309" stroke-width="2"/>
+      <text x="670" y="385" fill="#ffffff">7</text>
+      <text x="646" y="447" font-size="11" font-weight="600" fill="#1e293b">Lubrifiants</text>
+    </g>
+    <g>
+      <circle cx="550" cy="470" r="15" fill="#15803d"/>
+      <text x="550" y="475" fill="#ffffff">8</text>
+      <text x="550" y="514" font-size="11" font-weight="600" fill="#1e293b">Évaluation · quiz</text>
+    </g>
+  </g>
+
+  <!-- ================= Cotes ================= -->
+  <g stroke="#64748b" stroke-width="1.2" fill="#475569" font-size="12" font-weight="600">
+    <line x1="100" y1="64" x2="700" y2="64"/>
+    <line x1="100" y1="59" x2="100" y2="69"/><line x1="700" y1="59" x2="700" y2="69"/>
+    <text x="400" y="60" text-anchor="middle" stroke="none">10,00 m</text>
+    <line x1="84" y1="80" x2="84" y2="560"/>
+    <line x1="79" y1="80" x2="89" y2="80"/><line x1="79" y1="560" x2="89" y2="560"/>
+    <text x="72" y="325" text-anchor="middle" stroke="none" transform="rotate(-90 72 325)">8,00 m</text>
+  </g>
+
+  <!-- Repère d'axes -->
+  <g stroke="#94a3b8" stroke-width="1.5" fill="#64748b" font-size="11" font-weight="700">
+    <line x1="716" y1="96" x2="756" y2="96" marker-end="url(#fleche)"/>
+    <line x1="716" y1="96" x2="716" y2="136" marker-end="url(#fleche)"/>
+    <text x="764" y="100" stroke="none">X</text>
+    <text x="712" y="152" stroke="none">Z</text>
+    <text x="708" y="88"  stroke="none" font-size="10" font-weight="400">0,0</text>
+  </g>
+  <defs>
+    <marker id="fleche" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M 0 0 L 7 3.5 L 0 7 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- ================= Légende ================= -->
+  <g font-size="12" fill="#1e293b">
+    <line x1="100" y1="606" x2="800" y2="606" stroke="#e2e8f0" stroke-width="1.5"/>
+
+    <circle cx="110" cy="632" r="8" fill="#2563eb"/>
+    <text x="126" y="636">Panneau d'information</text>
+
+    <circle cx="290" cy="632" r="8" fill="#7c3aed"/>
+    <text x="306" y="636">Vidéo</text>
+
+    <circle cx="390" cy="632" r="8" fill="#b45309"/>
+    <text x="406" y="636">Document PDF</text>
+
+    <circle cx="540" cy="632" r="8" fill="#15803d"/>
+    <text x="556" y="636">Quiz noté</text>
+
+    <circle cx="660" cy="632" r="8" fill="#2563eb" fill-opacity="0.55" stroke="#2563eb" stroke-width="2"/>
+    <text x="676" y="636">Poste facultatif</text>
+
+    <line x1="102" y1="662" x2="130" y2="662" stroke="#0ea5e9" stroke-width="2.5" stroke-dasharray="9 6"/>
+    <text x="140" y="666">Parcours conseillé</text>
+
+    <circle cx="304" cy="662" r="9" fill="#0ea5e9" fill-opacity="0.07" stroke="#0ea5e9" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="320" y="666">Zone de déclenchement par proximité</text>
+
+    <rect x="590" y="654" width="18" height="14" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="616" y="666">Mobilier (emprise au sol)</text>
+
+    <text x="100" y="700" font-size="11" fill="#64748b">Allées libres ≥ 1,80 m · à valider sur le blocking, étape 1.2 — non négociable</text>
+    <text x="800" y="700" font-size="11" fill="#64748b" text-anchor="end">Étape 0.3 · plan d'intention — la source de vérité au runtime reste les Empty du .glb (étape 1.10)</text>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+# Dépendances
+node_modules/
+vendor/
+
+# Identifiants et notes locales — ne quittent JAMAIS cette machine
+*.local.md
+identifiants*
+
+# Paquets de déploiement (contiennent vendor/ et les builds)
+deploiement/
+*.zip
+
+# Environnement
+.env
+.env.local
+.env.*.local
+*.pem
+*-key.pem
+
+# Build
+dist/
+build/
+.vite/
+*.tsbuildinfo
+
+# Laravel (chemins relatifs à chaque dossier de projet)
+**/api/storage/*.key
+**/api/storage/framework/cache/*
+**/api/storage/framework/sessions/*
+**/api/storage/framework/views/*
+**/api/storage/logs/*
+**/api/bootstrap/cache/*
+**/api/public/storage
+**/api/public/hot
+**/api/.phpunit.result.cache
+**/api/database/*.sqlite
+**/api/database/*.sqlite-journal
+
+# Logs et divers
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+
+# Sources 3D lourdes (Blender) — voir docs/licences.md
+assets-src/**/*.blend
+assets-src/**/*.blend1
+assets-src/**/*.exr
+assets-src/**/*.hdr
+
+# Scratch
+/tmp/
+/scratch/
