@@ -371,7 +371,12 @@ export function Viewer({ objet, reprise = null }: Props) {
         )}
 
         {!enRA && annotations.length > 0 && (
-          <Progression consultees={visitees.size} total={annotations.length} />
+          <Progression
+            consultees={visitees.size}
+            total={annotations.length}
+            onPrecedent={() => decaler(-1)}
+            onSuivant={() => decaler(1)}
+          />
         )}
 
         {!enRA && (
@@ -462,27 +467,51 @@ function SurveillanceSessionRA({ onChangement }: { onChangement: (actif: boolean
   return null
 }
 
-function Progression({ consultees, total }: { consultees: number; total: number }) {
+function Progression({
+  consultees,
+  total,
+  onPrecedent,
+  onSuivant,
+}: {
+  consultees: number
+  total: number
+  onPrecedent: () => void
+  onSuivant: () => void
+}) {
   const termine = consultees >= total
 
   return (
-    <div
-      className={`progression ${termine ? 'progression--terminee' : ''}`}
-      role="status"
-      aria-live="polite"
-    >
+    <div className={`progression ${termine ? 'progression--terminee' : ''}`}>
       <div className="progression__piste" aria-hidden="true">
         <div className="progression__barre" style={{ width: `${(consultees / total) * 100}%` }} />
       </div>
-      <p className="progression__texte">
-        {termine ? (
-          <>
-            <Icone nom="termine" taille={14} /> Toutes les annotations consultées
-          </>
-        ) : (
-          `${consultees} / ${total} annotations consultées`
-        )}
-      </p>
+
+      <div className="progression__ligne">
+        <p className="progression__texte" role="status" aria-live="polite">
+          {termine ? (
+            <>
+              <Icone nom="termine" taille={14} /> Toutes consultées
+            </>
+          ) : (
+            `${consultees} / ${total} annotations`
+          )}
+        </p>
+
+        {/*
+          Ces flèches ne sont pas un confort. Une pastille située derrière une
+          pièce est masquée — c'est le rôle de l'occlusion — et rien
+          n'indiquerait comment l'atteindre. Elles garantissent que les N
+          annotations restent accessibles quel que soit l'angle de vue.
+        */}
+        <span className="progression__fleches">
+          <button type="button" onClick={onPrecedent} aria-label="Annotation précédente">
+            <Icone nom="precedent" taille={15} />
+          </button>
+          <button type="button" onClick={onSuivant} aria-label="Annotation suivante">
+            <Icone nom="suivant" taille={15} />
+          </button>
+        </span>
+      </div>
     </div>
   )
 }

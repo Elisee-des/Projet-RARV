@@ -34,7 +34,22 @@ export function Contenu3D({
 
   // Rayon de pastille proportionnel à l'objet : lisible sur une pompe de
   // 1,5 m comme sur une pièce de 20 cm.
-  const rayonPastille = mesure ? Math.max(mesure.rayon / echelle, 0.01) * 0.075 : 0.05
+  const rayonLocal = mesure ? Math.max(mesure.rayon / echelle, 0.01) : 0.6
+  const rayonPastille = rayonLocal * 0.075
+
+  /*
+   * Décollement des pastilles, le long de leur normale.
+   *
+   * Les positions relevées au raycast sont EXACTEMENT sur la surface. Le
+   * rayon d'occlusion touche donc cette même surface au point visé, et la
+   * pastille se masque elle-même — y compris au sommet de l'objet, là où
+   * rien ne peut la cacher.
+   *
+   * Proportionnel au modèle : une valeur fixe en mètres serait invisible sur
+   * un équipement de trois mètres et grotesque sur une pièce de vingt
+   * centimètres.
+   */
+  const decalage = rayonLocal * 0.06
 
   return (
     <group scale={echelle}>
@@ -49,6 +64,7 @@ export function Contenu3D({
               key={annotation.id}
               annotation={annotation}
               rayon={rayonPastille}
+              decalage={decalage}
               actif={selection?.id === annotation.id}
               visite={visitees.has(annotation.id)}
               onOuvrir={onOuvrir}
@@ -57,6 +73,7 @@ export function Contenu3D({
             <AnnotationPin
               key={annotation.id}
               annotation={annotation}
+              decalage={decalage}
               actif={selection?.id === annotation.id}
               visite={visitees.has(annotation.id)}
               onOuvrir={onOuvrir}

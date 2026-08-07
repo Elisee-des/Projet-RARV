@@ -1,11 +1,38 @@
+import { useMemo } from 'react'
 import { Html } from '@react-three/drei'
-import type { Annotation } from '../api/types'
+import type { Annotation, Triplet } from '../api/types'
 
 type Props = {
   annotation: Annotation
   actif: boolean
   visite: boolean
+  /** Décollement de la surface, en unités locales du modèle. */
+  decalage?: number
   onOuvrir: (annotation: Annotation) => void
+}
+
+/**
+ * Position décollée de la surface, le long de la normale.
+ *
+ * ⚠️ Sans ce décalage, la pastille SE MASQUE ELLE-MÊME : elle est posée
+ * exactement sur la géométrie, et le rayon d'occlusion touche cette même
+ * surface au point visé. Une pastille placée au sommet de l'objet — donc
+ * jamais cachée par quoi que ce soit — disparaissait ainsi selon l'angle
+ * de vue.
+ *
+ * C'est à cela que sert la normale relevée au raycast de l'étape 8.4.
+ */
+export function positionDecollee(annotation: Annotation, decalage: number): Triplet {
+  const [x, y, z] = annotation.position
+  const normale = annotation.normal
+
+  if (!normale || decalage <= 0) return annotation.position
+
+  return [
+    x + normale[0] * decalage,
+    y + normale[1] * decalage,
+    z + normale[2] * decalage,
+  ]
 }
 
 /**
@@ -18,7 +45,12 @@ type Props = {
  * cela, les annotations de la face arrière flottent devant l'objet et le
  * repère spatial s'effondre.
  */
-export function AnnotationPin({ annotation, actif, visite, onOuvrir }: Props) {
+export function AnnotationPin({ annotation, actif, visite, decalage = 0, onOuvrir }: Props) {
+  const position = useMemo(
+    () => positionDecollee(annotation, decalage),
+    [annotation, decalage]
+  )
+
   const classes = [
     'pastille',
     visite && 'pastille--visitee',
@@ -28,7 +60,7 @@ export function AnnotationPin({ annotation, actif, visite, onOuvrir }: Props) {
     .join(' ')
 
   return (
-    <group position={annotation.position}>
+    <group position={position}>
       <Html center occlude zIndexRange={[24, 0]}>
         <button
           type="button"

@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { Billboard } from '@react-three/drei'
 import type { ThreeEvent } from '@react-three/fiber'
 import type { Annotation } from '../api/types'
+import { positionDecollee } from './AnnotationPin'
 import { pastilleTexture, type EtatPastille } from './pastilleTexture'
 
 type Props = {
@@ -9,6 +10,8 @@ type Props = {
   rayon: number
   actif: boolean
   visite: boolean
+  /** Décollement de la surface, le long de la normale. */
+  decalage?: number
   onOuvrir: (annotation: Annotation) => void
 }
 
@@ -22,9 +25,20 @@ type Props = {
  * `<Billboard>` fait toujours face à la caméra ; le numéro reste donc lisible
  * quel que soit l'endroit d'où l'utilisateur regarde l'objet.
  */
-export function AnnotationPin3D({ annotation, rayon, actif, visite, onOuvrir }: Props) {
+export function AnnotationPin3D({
+  annotation,
+  rayon,
+  actif,
+  visite,
+  decalage = 0,
+  onOuvrir,
+}: Props) {
   const etat: EtatPastille = actif ? 'active' : visite ? 'visitee' : 'neutre'
   const texture = useMemo(() => pastilleTexture(annotation.order, etat), [annotation.order, etat])
+  const position = useMemo(
+    () => positionDecollee(annotation, decalage),
+    [annotation, decalage]
+  )
 
   const surClic = (evenement: ThreeEvent<MouseEvent>) => {
     evenement.stopPropagation()
@@ -32,7 +46,7 @@ export function AnnotationPin3D({ annotation, rayon, actif, visite, onOuvrir }: 
   }
 
   return (
-    <Billboard position={annotation.position}>
+    <Billboard position={position}>
       <mesh onClick={surClic} onPointerDown={(e) => e.stopPropagation()}>
         {/* Zone de contact plus large que le visuel : viser au doigt, sur un
             objet vu de loin, demande une cible généreuse. */}
