@@ -9,7 +9,6 @@
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /viewer/
 
     # Les fichiers et dossiers réels sont servis directement : assets, wasm,
     # décodeurs. Ne jamais les rediriger.
@@ -18,7 +17,13 @@
     RewriteRule ^ - [L]
 
     # Tout le reste appartient au routage interne du viewer.
-    RewriteRule . /viewer/index.html [L]
+    #
+    # ⚠️ Cible RELATIVE, sans RewriteBase : Apache la résout dans le dossier
+    # qui contient ce fichier. Un « /viewer/index.html » absolu supposerait
+    # que public/ soit la racine du domaine — faux dès que l'application est
+    # servie depuis un sous-dossier, comme sur un hébergement mutualisé où la
+    # racine est imposée.
+    RewriteRule . index.html [L]
 </IfModule>
 
 # --- Types MIME ---------------------------------------------------------

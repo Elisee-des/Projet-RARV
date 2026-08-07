@@ -1,0 +1,76 @@
+# =====================================================================
+#  Racine du dépôt servie comme racine web
+#  https://rarv.kodemeet.com/  →  public_html/  (ce dossier)
+# =====================================================================
+#
+#  Sur un hébergement où la racine du sous-domaine ne peut pas être
+#  déplacée, le dépôt entier se retrouve sous le web. Ce fichier fait
+#  deux choses, dans cet ordre :
+#
+#    1. INTERDIRE ce qui ne doit jamais sortir — .git, .env, vendor,
+#       storage, sources des fronts
+#    2. Rediriger tout le reste vers la vraie racine de l'application,
+#       Projet-01-Visualiseur-RA-WebXR/api/public/
+#
+#  ⚠️ Ce fichier est la SEULE barrière entre le web et les secrets de
+#  l'application. S'il est supprimé, désactivé, ou si mod_rewrite est
+#  coupé, `.env` et l'historique git deviennent téléchargeables.
+#  La solution durable reste de pointer la racine du sous-domaine
+#  directement sur api/public — voir docs/deploiement-cpanel.md.
+# =====================================================================
+
+Options -Indexes
+
+# --- 1. Interdits absolus ----------------------------------------------
+
+# L'historique git expose la totalité du code ET les valeurs
+# supprimées d'anciens commits. C'est l'exposition la plus grave.
+RedirectMatch 404 ^/\.git
+
+<FilesMatch "^\.(env|env\..*|git.*|htaccess|htpasswd)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<FilesMatch "\.(json|lock|md|sqlite|log|yml|neon|dist)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Dossiers qui n'ont rien à faire sur le web, même par accident.
+    RewriteRule ^(.*/)?\.git(/|$)                        - [F,L]
+    RewriteRule ^(.*/)?\.env                             - [F,L]
+    RewriteRule ^(.*/)?vendor/                           - [F,L]
+    RewriteRule ^(.*/)?node_modules/                     - [F,L]
+    RewriteRule ^(.*/)?api/storage/                      - [F,L]
+    RewriteRule ^(.*/)?api/(app|bootstrap|config|database|routes|tests)/ - [F,L]
+
+    # --- 2. Tout le reste part vers la racine applicative --------------
+    #
+    # La condition REDIRECT_STATUS évite de préfixer une seconde fois :
+    # après une réécriture interne, Apache repasse par ce fichier, et
+    # sans elle la règle s'appliquerait en boucle.
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^(.*)$ Projet-01-Visualiseur-RA-WebXR/api/public/$1 [L]
+</IfModule>
+
+# --- En-têtes de sécurité ----------------------------------------------
+# Doublons de ceux posés par Laravel : ils couvrent aussi les fichiers
+# statiques des fronts, qui ne traversent pas PHP.
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
