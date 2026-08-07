@@ -21,6 +21,18 @@
 
 Options -Indexes
 
+# ⚠️ mod_dir doit se taire.
+#
+# Sans cela, une requête vers un répertoire sans barre finale — /labo — est
+# d'abord réécrite en interne vers …/api/public/labo, PUIS mod_dir émet une
+# redirection 301 pour ajouter la barre… en exposant le chemin interne
+# réécrit. Le navigateur redemande alors
+# /Projet-01-Visualiseur-RA-WebXR/api/public/labo/, que ce fichier préfixe une
+# seconde fois — et la page est vide.
+#
+# La barre finale est ajoutée explicitement plus bas, AVANT toute réécriture.
+DirectorySlash Off
+
 # --- 1. Interdits absolus ----------------------------------------------
 
 # L'historique git expose la totalité du code ET les valeurs
@@ -57,6 +69,14 @@ RedirectMatch 404 ^/\.git
     RewriteRule ^(.*/)?node_modules/                     - [F,L]
     RewriteRule ^(.*/)?api/storage/                      - [F,L]
     RewriteRule ^(.*/)?api/(app|bootstrap|config|database|routes|tests)/ - [F,L]
+
+    # --- Barre finale des applications front ---------------------------
+    #
+    # Émise ICI, avant toute réécriture, pour que la redirection porte
+    # l'URL PUBLIQUE (/labo/) et non le chemin interne. C'est la seule
+    # redirection visible de ce fichier ; tout le reste est interne.
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^(viewer|labo)$ /$1/ [R=301,L]
 
     # --- 2. Tout le reste part vers la racine applicative --------------
     #
