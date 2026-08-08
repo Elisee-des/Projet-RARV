@@ -120,11 +120,23 @@
                 <li>Attestation de réussite en PDF</li>
             </ul>
 
+            {{--
+                Barre finale OBLIGATOIRE.
+
+                Sans elle, /labo déclenche une redirection avant d'atteindre
+                l'application. Un site ne doit pas dépendre d'une redirection
+                pour ses propres liens : c'est une requête de plus, et surtout
+                un 301 que les navigateurs mettent en cache — le nôtre l'avait
+                mémorisé vers une mauvaise cible et y retournait sans plus
+                jamais interroger le serveur.
+            --}}
+            @php $urlLabo = \Illuminate\Support\Str::finish(config('rarv.lab_url'), '/'); @endphp
+
             <div class="module__pied">
-                <a class="module__bouton" href="{{ rtrim(config('rarv.lab_url'), '/') }}">
+                <a class="module__bouton" href="{{ $urlLabo }}">
                     <x-icone nom="cube" :taille="17"/> Entrer dans l'atelier
                 </a>
-                <span class="module__url">{{ rtrim(config('rarv.lab_url'), '/') }}</span>
+                <span class="module__url">{{ $urlLabo }}</span>
             </div>
         </article>
     </div>

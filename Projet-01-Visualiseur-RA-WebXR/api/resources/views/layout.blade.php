@@ -233,7 +233,10 @@
                 <x-icone nom="lecon"/> Leçon
             </a>
 
-            <a href="{{ rtrim(config('rarv.viewer_url'), '/') }}" target="_blank" rel="noopener">
+            {{-- Barre finale : sans elle, le lien passe par une redirection 301
+                 que le navigateur met en cache. --}}
+            <a href="{{ \Illuminate\Support\Str::finish(config('rarv.viewer_url'), '/') }}"
+               target="_blank" rel="noopener">
                 <x-icone nom="cube"/> Viewer 3D
                 <x-icone nom="externe" :taille="13"/>
             </a>
@@ -275,7 +278,10 @@
         <nav aria-label="Navigation de bas de page">
             <a href="{{ route('demo') }}"><x-icone nom="accueil" :taille="15"/> Accueil</a>
             <a href="{{ route('lecon.show', 'pompe-centrifuge-01') }}"><x-icone nom="lecon" :taille="15"/> Leçon de démonstration</a>
-            <a href="{{ rtrim(config('rarv.viewer_url'), '/') }}" target="_blank" rel="noopener">
+            {{-- Barre finale : sans elle, le lien passe par une redirection 301
+                 que le navigateur met en cache. --}}
+            <a href="{{ \Illuminate\Support\Str::finish(config('rarv.viewer_url'), '/') }}"
+               target="_blank" rel="noopener">
                 <x-icone nom="cube" :taille="15"/> Viewer 3D <x-icone nom="externe" :taille="12"/>
             </a>
             <a href="{{ route('admin.objets.index') }}"><x-icone nom="reglages" :taille="15"/> Back-office</a>
