@@ -70,6 +70,22 @@ RedirectMatch 404 ^/\.git
     RewriteRule ^(.*/)?api/storage/                      - [F,L]
     RewriteRule ^(.*/)?api/(app|bootstrap|config|database|routes|tests)/ - [F,L]
 
+    # --- Rattrapage du chemin interne ----------------------------------
+    #
+    # Une version antérieure de ce fichier laissait mod_dir émettre un 301
+    # vers le chemin RÉÉCRIT. Ce 301 étant permanent, les navigateurs qui
+    # l'ont reçu s'y rendent désormais sans même interroger le serveur :
+    # corriger la règle fautive ne suffit pas à les libérer.
+    #
+    # Cette règle renvoie donc ce chemin interne vers l'URL publique. Le
+    # nouveau 301 remplace l'ancien dans le cache du navigateur, qui se
+    # répare de lui-même à la première visite.
+    #
+    # Elle vaut aussi pour l'hygiène : le chemin interne cesse d'être une
+    # adresse utilisable.
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^Projet-01-Visualiseur-RA-WebXR/api/public/(.*)$ /$1 [R=301,L]
+
     # --- Barre finale des applications front ---------------------------
     #
     # Émise ICI, avant toute réécriture, pour que la redirection porte
